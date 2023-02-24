@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Expense Manager - Expenses</title>
+
 </head>
+<link rel="stylesheet" th:href="@{/css/jquery-ui.css}" />
 <body>
   <h1>List of Expenses</h1>
     <hr/>
@@ -11,7 +13,16 @@
       Search by keyword:
       <input type="text" plackeholder="keyword" th:field="*{keyword}"/>
       <input type="submit" value="Submit">
+      <select th:field="*{sortBy}">
+          <option value="date">Date</option>
+          <option value="amount">Amount</option>
+      </select>
+
+      <input type="text" id="startdate" placeholder="Enter Start date" th:field="*{startDate}"/>
+      <input type="text" id="enddate" placeholder="Enter End date" th:field="*{endDate}"/>
+      <input type="submit" value="Submit" />
   </form>
+
   <div>
       <a th:href="@{/createExpense}">Create new expense</a>
   </div>
@@ -38,5 +49,10 @@
         </tr>
         </tbody>
     </table>
+
+  <script th:src="@{/js/jquery.js}"></script>
+  <script th:src="@{/js/jquery-ui.js}"></script>
+  <script th:src="@{/js/expense-form.js}"></script>
+  <script th:src="@{/js/expense-list.js}"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -19,11 +20,12 @@ public class ExpenseFilterController {
     ExpenseService expenseService;
 
     @GetMapping("/filterExpenses")
-    public String filterExpenses(@ModelAttribute("filter") ExpenseFilterDto expenseFilterDto, Model model){
+    public String filterExpenses(@ModelAttribute("filter") ExpenseFilterDto expenseFilterDto, Model model) throws ParseException {
 
-        List<ExpenseDTO> list = expenseService.getFilteredExpenses(expenseFilterDto.getKeyword());
+        List<ExpenseDTO> list = expenseService.getFilteredExpenses(expenseFilterDto);
 
         model.addAttribute("expenses", list);
         return "expense-list";
     }
+
 }

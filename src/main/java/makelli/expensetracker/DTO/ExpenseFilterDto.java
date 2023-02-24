@@ -10,4 +10,10 @@ import lombok.NoArgsConstructor;
 public class ExpenseFilterDto {
 
     private String keyword;
+
+    private String sortBy;
+
+    private String startDate;
+
+    private String endDate;
 }
