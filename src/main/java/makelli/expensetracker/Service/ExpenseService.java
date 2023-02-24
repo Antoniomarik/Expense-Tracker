@@ -72,6 +72,7 @@ public class ExpenseService {
     }
 
     public List<ExpenseDTO> getFilteredExpenses (ExpenseFilterDto expenseFilterDto) throws ParseException {
+
         String keyword = expenseFilterDto.getKeyword();
         String sortby = expenseFilterDto.getSortBy();
         String startdateString = expenseFilterDto.getStartDate();
@@ -79,7 +80,8 @@ public class ExpenseService {
 
         Date startdate = !startdateString.isEmpty() ? DateTimeUtil.convertStringToDate(startdateString) : new Date(0);
         Date enddate = !enddateString.isEmpty() ? DateTimeUtil.convertStringToDate(enddateString) : new Date(System.currentTimeMillis());
-        List<Expense> list =!keyword.isEmpty() ? expenseRepository.findByNameAndDateBetween(keyword,startdate,enddate) : expenseRepository.findAll();
+
+        List<Expense> list = !keyword.isEmpty() ? expenseRepository.findByNameAndDateBetween(keyword,startdate,enddate) : expenseRepository.findByDateBetween(startdate,enddate);
         List<ExpenseDTO> dtoList = new java.util.ArrayList<>(list.stream().map(this::mapToDto).toList());
 
         if(sortby.equals("date")){
