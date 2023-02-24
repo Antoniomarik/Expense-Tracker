@@ -6,7 +6,7 @@ import makelli.expensetracker.Entity.Expense;
 import makelli.expensetracker.Repository.ExpenseRepository;
 import makelli.expensetracker.Util.DateTimeUtil;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
