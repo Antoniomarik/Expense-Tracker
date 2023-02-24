@@ -60,4 +60,10 @@ public class ExpenseService {
         return expense;
     }
 
+    public void deleteExpense (String id){
+        Expense existingexpense = expenseRepository.findByExpenseId(id).orElseThrow(() -> new RuntimeException("not found"));
+        expenseRepository.delete(existingexpense);
+
+    }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -38,6 +39,14 @@ public class ExpenseController {
     public String expenseFormPOST(@ModelAttribute("expense")ExpenseDTO expenseDTO) throws ParseException {
 
         expenseService.saveExpanseDetails(expenseDTO);
+
+        return "redirect:/expenses";
+    }
+
+    @GetMapping("/deleteExpense")
+    public String deleteExpense(@RequestParam String id){
+
+        expenseService.deleteExpense(id);
 
         return "redirect:/expenses";
     }
