@@ -1,6 +1,7 @@
 package makelli.expensetracker.Controller;
 
 import makelli.expensetracker.DTO.ExpenseDTO;
+import makelli.expensetracker.DTO.ExpenseFilterDto;
 import makelli.expensetracker.Service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class ExpenseController {
     @GetMapping("/expenses")
     public String showExpenseList(Model model){
         model.addAttribute("expenses", expenseService.GetAllExpenses());
+        model.addAttribute("filter", new ExpenseFilterDto());
         return "expense-list";
     }
 

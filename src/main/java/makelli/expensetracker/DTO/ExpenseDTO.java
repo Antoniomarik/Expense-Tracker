@@ -12,7 +12,7 @@ import java.sql.Date;
 @NoArgsConstructor
 public class ExpenseDTO {
 
-    private long id;
+    private Long id;
 
     private String expenseId;
 
