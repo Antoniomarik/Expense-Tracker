@@ -19,6 +19,9 @@
         <textarea rows="5" placeholder="Enter expanse description" th:field="*{description}"></textarea>
         <br/><br/>
         <button type="submit">Save</button>
+
+        <input type="hidden" th:field="*{expenseId}"/>
+        <input type="hidden" th:field="*{id}"/>
     </form>
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/jquery-ui.js}"></script>

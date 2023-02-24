@@ -47,11 +47,13 @@ public class ExpenseService {
     }
 
     private Expense mapToEntity(ExpenseDTO expenseDTO) throws ParseException {
-       // nap the dto to entity
+       // map the dto to entity
         Expense expense = modelMapper.map(expenseDTO,Expense.class);
 
         //generate expense id
+        if(expense.getExpenseId() == null){
         expense.setExpenseId(UUID.randomUUID().toString());
+        }
 
         //set expanse date
         expense.setDate(DateTimeUtil.convertStringToDate(expenseDTO.getDateString()));
@@ -63,6 +65,11 @@ public class ExpenseService {
     public void deleteExpense (String id){
         Expense existingexpense = expenseRepository.findByExpenseId(id).orElseThrow(() -> new RuntimeException("not found"));
         expenseRepository.delete(existingexpense);
+    }
+
+    public ExpenseDTO getExpenseById(String id){
+        Expense existingexpense = expenseRepository.findByExpenseId(id).orElseThrow(() -> new RuntimeException("not found"));
+        return mapToDto(existingexpense);
 
     }
 

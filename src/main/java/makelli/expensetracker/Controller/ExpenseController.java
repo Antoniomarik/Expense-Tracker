@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.math.BigDecimal;
-import java.sql.Date;
+
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Controller
 public class ExpenseController {
@@ -49,5 +47,13 @@ public class ExpenseController {
         expenseService.deleteExpense(id);
 
         return "redirect:/expenses";
+    }
+
+    @GetMapping("/updateExpense")
+    public String updateExpense (@RequestParam String id, Model model){
+        ExpenseDTO expense =  expenseService.getExpenseById(id);
+
+        model.addAttribute("expense", expense);
+        return "expense-form";
     }
 }
