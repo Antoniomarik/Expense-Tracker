@@ -51,14 +51,15 @@ public class ExpenseService {
         Expense expense = modelMapper.map(expenseDTO,Expense.class);
 
         //generate expense id
-        if(expense.getExpenseId() == null){
+        if(expense.getId() == null){
+
         expense.setExpenseId(UUID.randomUUID().toString());
         }
 
         //set expanse date
         expense.setDate(DateTimeUtil.convertStringToDate(expenseDTO.getDateString()));
 
-        //return expanse entity
+        //return expanse entity 
         return expense;
     }
 
@@ -71,6 +72,14 @@ public class ExpenseService {
         Expense existingexpense = expenseRepository.findByExpenseId(id).orElseThrow(() -> new RuntimeException("not found"));
         return mapToDto(existingexpense);
 
+    }
+
+    public List<ExpenseDTO> getFilteredExpenses (String keyword){
+
+        List<Expense> list = expenseRepository.findByName(keyword);
+        List<ExpenseDTO> dtoList = list.stream().map(this::mapToDto).toList();
+
+        return dtoList;
     }
 
 }
