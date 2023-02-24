@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,5 +25,20 @@ public class ExpenseController {
     public String showExpenseList(Model model){
         model.addAttribute("expenses", expenseService.GetAllExpenses());
         return "expense-list";
+    }
+
+    @GetMapping("/createExpense")
+    public String expenseForm(Model model){
+        model.addAttribute("expense", new ExpenseDTO());
+
+        return "expense-form";
+    }
+
+    @PostMapping("/saveorupdateexpense")
+    public String expenseFormPOST(@ModelAttribute("expense")ExpenseDTO expenseDTO) throws ParseException {
+
+        expenseService.saveExpanseDetails(expenseDTO);
+
+        return "redirect:/expenses";
     }
 }
