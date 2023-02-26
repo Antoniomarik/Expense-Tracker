@@ -2,6 +2,7 @@ package makelli.expensetracker.Controller;
 
 import makelli.expensetracker.DTO.ExpenseDTO;
 import makelli.expensetracker.DTO.ExpenseFilterDto;
+import makelli.expensetracker.Entity.Expense;
 import makelli.expensetracker.Service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import java.math.BigDecimal;
 import java.text.ParseException;
+import java.util.List;
 
 
 @Controller
@@ -23,8 +26,12 @@ public class ExpenseController {
 
     @GetMapping("/expenses")
     public String showExpenseList(Model model){
-        model.addAttribute("expenses", expenseService.GetAllExpenses());
+        List<ExpenseDTO> list = expenseService.GetAllExpenses();
+        BigDecimal totalexpenses = expenseService.totalExpenses(list);
+
+        model.addAttribute("expenses", list);
         model.addAttribute("filter", new ExpenseFilterDto());
+        model.addAttribute("sum", totalexpenses);
         return "expense-list";
     }
 

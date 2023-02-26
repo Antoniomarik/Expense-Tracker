@@ -8,6 +8,8 @@ import makelli.expensetracker.Repository.ExpenseRepository;
 import makelli.expensetracker.Util.DateTimeUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
@@ -89,6 +91,11 @@ public class ExpenseService {
         }else
             dtoList.sort( (ob1,ob2) -> ob2.getAmount().compareTo(ob1.getAmount()));
         return dtoList;
+    }
+
+    public BigDecimal totalExpenses (List<ExpenseDTO> expenses){
+        BigDecimal sum = new BigDecimal(0);
+        return expenses.stream().map(x -> x.getAmount().add(sum)).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 }

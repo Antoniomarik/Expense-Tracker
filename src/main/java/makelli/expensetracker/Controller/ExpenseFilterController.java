@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 
@@ -23,8 +24,10 @@ public class ExpenseFilterController {
     public String filterExpenses(@ModelAttribute("filter") ExpenseFilterDto expenseFilterDto, Model model) throws ParseException {
 
         List<ExpenseDTO> list = expenseService.getFilteredExpenses(expenseFilterDto);
+        BigDecimal sum = expenseService.totalExpenses(list);
 
         model.addAttribute("expenses", list);
+        model.addAttribute("sum",sum);
         return "expense-list";
     }
 
