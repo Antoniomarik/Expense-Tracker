@@ -9,7 +9,7 @@
     <h1>Create new expense</h1>
     <hr/>
 
-    <form th:action="@{/saveorupdateexpense}" th:object="${expense}" method="post">
+    <form th:action="@{/saveorupdateexpense}" th:object="${expense}" method="post" id="expenseForm">
         <input type="text" placeholder="Enter expanse name"  th:field="*{name}"/>
         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         <br/><br/>
@@ -28,6 +28,7 @@
     </form>
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/jquery-ui.js}"></script>
+    <script th:src="@{/js/jquery-validator.js}"></script>
     <script th:src="@{/js/expense-form.js}"></script>
 </body>
 </html>
