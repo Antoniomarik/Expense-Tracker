@@ -6,22 +6,34 @@ $(function(){
     maxDate: new Date()
     });
 
-    const $expenseForm = $("#expenseform");
+    const $expenseForm = $("#expenseForm");
 
     if($expenseForm.length){
     $expenseForm.validate({
+
         rules:{
             name:{
                 required:true,
                 minlength: 3
-            }
+            },
+            amount: {
+                required:true,
+                },
+            dateString:{
+                required:true
+                }
         },
         messages:{
-            name:{
-                required: 'Please enter expanse name',
-                minlength: 'Expanse ame shpould be minimum 3'
-                }
-
+                name:{
+                    required: 'Please enter expanse name',
+                    minlength: 'Expanse ame shpould be minimum 3'
+                },
+                amount:{
+                    required:"this field is requred"
+                    }
+                dateString:{
+                    required:"this field is required!"
+                    }
             }
     })}
 })
