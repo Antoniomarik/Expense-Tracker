@@ -7,9 +7,13 @@ import makelli.expensetracker.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.naming.Binding;
+import javax.validation.Valid;
 
 @Controller
 
@@ -32,7 +36,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") UserDTO userDTO,Model model){
+    public String register(@Valid @ModelAttribute("user") UserDTO userDTO,
+                           BindingResult result,
+                           Model model
+                           ){
+        if(result.hasErrors()){
+            return "register";
+        }
       userService.saveUser(userDTO);
       model.addAttribute("successMsg",true);
         return "login";
