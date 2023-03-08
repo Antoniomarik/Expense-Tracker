@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Expense Manager - Login</title>
+
+</head>
+<link rel="stylesheet" th:href="@{/css/jquery-ui.css}" />
+<body>
+  <h1>Login</h1>
+  <hr/>
+  <div th:if="${successMsg}">
+    <h1>Thank you for registering!</h1>
+  </div>
+
+  <form>
+    <input type="text" name="email" placeholder="Enter Email"/>
+    <br><br>
+    <input type="password" name="password" placeholder="Enter Password"/>
+    <br><br>
+    <button type="submit">Login</button>
+
+  </form>
+</body>
+</html>
