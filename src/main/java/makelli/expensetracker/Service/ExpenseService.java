@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import makelli.expensetracker.DTO.ExpenseDTO;
 import makelli.expensetracker.DTO.ExpenseFilterDto;
 import makelli.expensetracker.Entity.Expense;
+import makelli.expensetracker.Entity.User;
 import makelli.expensetracker.Repository.ExpenseRepository;
 import makelli.expensetracker.Util.DateTimeUtil;
 import org.modelmapper.ModelMapper;
@@ -29,7 +30,8 @@ public class ExpenseService {
     UserService userService;
 
     public List<ExpenseDTO> GetAllExpenses (){
-        List<Expense> list =  expenseRepository.findAll();
+        User user = userService.getLoggedInUser();
+        List<Expense> list =  expenseRepository.findByUserId(user.getId());
         List<ExpenseDTO> dtoList =  list.stream().map(this::mapToDto).collect(Collectors.toList());
 
         return dtoList;
