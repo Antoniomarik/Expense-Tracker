@@ -30,7 +30,7 @@ $(function(){
                 },
                 amount:{
                     required:"this field is requred"
-                    }
+                    },
                 dateString:{
                     required:"this field is required!"
                     }

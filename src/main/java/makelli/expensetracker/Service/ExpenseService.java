@@ -7,6 +7,7 @@ import makelli.expensetracker.Entity.Expense;
 import makelli.expensetracker.Repository.ExpenseRepository;
 import makelli.expensetracker.Util.DateTimeUtil;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,6 +25,9 @@ public class ExpenseService {
 
     private final ModelMapper modelMapper;
 
+    @Autowired
+    UserService userService;
+
     public List<ExpenseDTO> GetAllExpenses (){
         List<Expense> list =  expenseRepository.findAll();
         List<ExpenseDTO> dtoList =  list.stream().map(this::mapToDto).collect(Collectors.toList());
@@ -40,6 +44,8 @@ public class ExpenseService {
     public ExpenseDTO saveExpanseDetails(ExpenseDTO expenseDTO) throws ParseException {
         //map dto to entity
         Expense expense = mapToEntity(expenseDTO);
+        //add logged in user to expanse entity
+        expense.setUser(userService.getLoggedInUser());
 
         //save entity to db
         expenseRepository.save(expense);
