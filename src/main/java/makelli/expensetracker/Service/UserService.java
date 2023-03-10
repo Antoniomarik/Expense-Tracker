@@ -6,6 +6,7 @@ import makelli.expensetracker.Entity.User;
 import makelli.expensetracker.Repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -18,8 +19,10 @@ public class UserService {
     UserRepository userRepository;
 
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public void saveUser(UserDTO userDTO){
+        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         User user = mapToEntity(userDTO);
         user.setUserId(UUID.randomUUID().toString());
 
