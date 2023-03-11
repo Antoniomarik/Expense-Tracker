@@ -4,6 +4,7 @@ import makelli.expensetracker.DTO.ExpenseDTO;
 import makelli.expensetracker.DTO.ExpenseFilterDto;
 import makelli.expensetracker.Entity.Expense;
 import makelli.expensetracker.Service.ExpenseService;
+import makelli.expensetracker.Util.DateTimeUtil;
 import makelli.expensetracker.validator.ExpenseValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,7 @@ public class ExpenseController {
         BigDecimal totalexpenses = expenseService.totalExpenses(list);
 
         model.addAttribute("expenses", list);
-        model.addAttribute("filter", new ExpenseFilterDto());
+        model.addAttribute("filter", new ExpenseFilterDto(DateTimeUtil.getCurrentMonthStartDate(),DateTimeUtil.getCurrentMonthDate()));
         model.addAttribute("sum", totalexpenses);
         return "expense-list";
     }

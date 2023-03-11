@@ -53,7 +53,7 @@ public class AuthController {
         }
       userService.saveUser(userDTO);
       model.addAttribute("successMsg",true);
-        return "login";
+        return "response";
     }
 
 }

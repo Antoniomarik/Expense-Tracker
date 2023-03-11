@@ -9,9 +9,6 @@
 <body>
   <h1>Login</h1>
   <hr/>
-  <div th:if="${successMsg}">
-    <h1>Thank you for registering!</h1>
-  </div>
 
   <form id="login" th:action="@{/login}" method="post">
     <div th:if="${param.error}">

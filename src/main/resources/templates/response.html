@@ -5,6 +5,11 @@
     <title>Woops!</title>
 </head>
 <body>
+<div th:if="${successMsg}">
+    <h1>Thank you for registering!</h1>
+    <a th:href="@{/login}"> Click here to log in </a>
+</div>
+
   <div th:if="${notFound}">
     <h1>Expense not Available</h1>
     <p th:text="${message}"></p>
