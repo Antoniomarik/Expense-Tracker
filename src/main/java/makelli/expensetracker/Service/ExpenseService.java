@@ -48,7 +48,10 @@ public class ExpenseService {
         Expense expense = mapToEntity(expenseDTO);
         //add logged in user to expanse entity
         expense.setUser(userService.getLoggedInUser());
-
+        //handle exception for future dates
+        if(!expense.getDate().before(new java.util.Date())){
+            throw new RuntimeException("Future date is not allowed!");
+        }
         //save entity to db
         expenseRepository.save(expense);
 
