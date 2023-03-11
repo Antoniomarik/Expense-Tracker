@@ -5,6 +5,9 @@ import makelli.expensetracker.DTO.UserDTO;
 import makelli.expensetracker.Entity.User;
 import makelli.expensetracker.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +27,13 @@ public class AuthController {
 
     @GetMapping({"/login","/"})
     public String showLoginPage(){
+       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        return "login";
+       if (auth == null|| auth instanceof AnonymousAuthenticationToken){
+           return "login";
+       }
+
+        return "redirect:/expenses";
     }
 
     @GetMapping("register")
