@@ -3,24 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Woops!</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/response.css}" />
 </head>
 <body>
-<div th:if="${successMsg}">
-    <h1>Thank you for registering!</h1>
-    <a th:href="@{/login}"> Click here to log in </a>
-</div>
+    <nav class="fixed-top bg-header-color py-4">
+        <div class="app-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <a th:href="@{/expenses}" class="text-wide">
+                        <span class="font-size-medium font-weight-bold">
+                            Expense Manager
+                        </span>
+                </a>
+            </div>
+        </div>
+    </nav>
 
-  <div th:if="${notFound}">
-    <h1>Expense not Available</h1>
-    <p th:text="${message}"></p>
-    <a th:href="@{/expenses}"> Home </a>
-  </div>
+    <div th:if="${successMsg}" class="container p-5 my-5 container-top-margin">
+        <h1>Success!</h1>
+        <p>Thank you for registering</p>
+        <a th:href="@{/login}" class="btn button_default"> Click here to log in </a>
+    </div>
 
-  <div th:if="${serverError}">
-      <h1>Please contact Adminisrator </h1>
-      <p>Something went wrong! Please contact administrator</p>
-      <p th:text="${message}"></p>
-      <a th:href="@{/expenses}"> Home </a>
-  </div>
+      <div th:if="${notFound}" class="container p-5 my-5 border container-top-margin">
+        <h1>Expense not Available</h1>
+        <p th:text="${message}"></p>
+        <a th:href="@{/expenses}" class="btn button_default"> Home </a>
+      </div>
+
+      <div th:if="${serverError}" class="container p-5 my-5 border container-top-margin">
+          <h1>Please contact Adminisrator </h1>
+          <p>Something went wrong! Please contact administrator</p>
+          <p th:text="${message}"></p>
+          <a th:href="@{/expenses}" class="btn button_default"> Home </a>
+      </div>
+
+    <footer class="py-5 footer">
+        <div class="container">
+            <p class="m-0 text-center text-dark">
+                Copyright &copy; Expense manager - Developed by Antoniomarik (antonio.marik1996@gmail.com)<br>
+                <a href="https://github.com/Antoniomarik">Git Repo</a>
+            </p>
+        </div>
+    </footer>
+
+<script th:src="@{/js/bootstrap.js}"></script>
 </body>
 </html>

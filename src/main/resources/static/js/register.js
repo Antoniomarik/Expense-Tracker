@@ -47,7 +47,12 @@ $(function(){
                         required:"PLease enter password",
                         equalTo:"Passwords not matching!"
                     }
-                }
+                },
+                errorElement: 'em',
+                            errorPlacement: function(error,element){
+                             error.addClass("help-block");
+                             error.insertAfter(element);
+                             }
         })
     }
 })

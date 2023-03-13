@@ -1,4 +1,9 @@
-a:hover, a {
+a:hover {
+    text-decoration:none;
+    color: #bdc6a6;
+}
+
+a {
     text-decoration:none;
     color: #8B78E6;
 }
@@ -14,12 +19,15 @@ a:hover, a {
 
 .font-size-medium{
     font-size:1.6rem;
+    color:white;
 }
 
 .font-size-small{
     font-size:1.2rem;
+    color:white;
 }
 
 .font-size-xsmall{
     font-size:1rem;
+    color:white
 }
