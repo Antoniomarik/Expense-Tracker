@@ -77,6 +77,7 @@
                             <div class="d-flex flex-row justify-content-between align-items-center px-3 pt-4 pb-2">
                                 <div>
                                     <h3 class="text-capitalized text-dark" th:text="${tempexpenses.name}"></h3>
+                                    <span class="text-dark fst-bold" th:text="${tempexpenses.description}"></span><br><br>
                                     <span class="text-dark fst-italic" th:text="${tempexpenses.dateString}"></span>
                                 </div>
                                 <p class="text-dark font-size-xsmlall badge rounded-pill bg-warning" th:text="${tempexpenses.amount}+' €'"></p>
