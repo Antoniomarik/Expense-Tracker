@@ -29,9 +29,14 @@ public class ExpenseService {
     @Autowired
     UserService userService;
 
-    public List<ExpenseDTO> GetAllExpenses (){
+    public List<ExpenseDTO> GetAllExpenses () throws ParseException {
         User user = userService.getLoggedInUser();
-        List<Expense> list =  expenseRepository.findByUserId(user.getId());
+        //List<Expense> list =  expenseRepository.findByUserId(user.getId());
+
+        Date endDate =  DateTimeUtil.convertStringToDate(DateTimeUtil.getCurrentMonthDate());
+        Date startDate = DateTimeUtil.convertStringToDate(DateTimeUtil.getCurrentMonthStartDate());
+
+        List<Expense> list = expenseRepository.findByDateBetweenAndUserId(startDate,endDate,user.getId());
         List<ExpenseDTO> dtoList =  list.stream().map(this::mapToDto).collect(Collectors.toList());
 
         return dtoList;

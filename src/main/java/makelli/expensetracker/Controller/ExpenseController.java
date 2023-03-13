@@ -29,7 +29,7 @@ public class ExpenseController {
     private ExpenseService expenseService;
 
     @GetMapping("/expenses")
-    public String showExpenseList(Model model){
+    public String showExpenseList(Model model) throws ParseException {
         List<ExpenseDTO> list = expenseService.GetAllExpenses();
         BigDecimal totalexpenses = expenseService.totalExpenses(list);
 
